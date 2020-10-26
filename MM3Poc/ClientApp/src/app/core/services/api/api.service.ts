@@ -1,4 +1,3 @@
-
 /* tslint:disable */
 /* eslint-disable */
 //----------------------
@@ -29,7 +28,7 @@ export class EmployeeClient implements IEmployeeClient {
 
   constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
     this.http = http;
-    this.baseUrl = baseUrl ? baseUrl : "http://localhost:60369";
+    this.baseUrl = baseUrl ? baseUrl : "http://localhost:5000";
   }
 
   get(): Observable<Employee[]> {
@@ -100,7 +99,7 @@ export class FeeClient implements IFeeClient {
 
   constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
     this.http = http;
-    this.baseUrl = baseUrl ? baseUrl : "http://localhost:60369";
+    this.baseUrl = baseUrl ? baseUrl : "http://localhost:5000";
   }
 
   get(): Observable<Fee[]> {
@@ -223,7 +222,7 @@ export class PersonClient implements IPersonClient {
 
   constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
     this.http = http;
-    this.baseUrl = baseUrl ? baseUrl : "http://localhost:60369";
+    this.baseUrl = baseUrl ? baseUrl : "http://localhost:5000";
   }
 
   get(): Observable<Person[]> {
@@ -345,7 +344,7 @@ export class TriggerClient implements ITriggerClient {
 
   constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
     this.http = http;
-    this.baseUrl = baseUrl ? baseUrl : "http://localhost:60369";
+    this.baseUrl = baseUrl ? baseUrl : "http://localhost:5000";
   }
 
   get(): Observable<Trigger[]> {
@@ -415,7 +414,7 @@ export class WeatherForecastClient implements IWeatherForecastClient {
 
   constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
     this.http = http;
-    this.baseUrl = baseUrl ? baseUrl : "http://localhost:60369";
+    this.baseUrl = baseUrl ? baseUrl : "http://localhost:5000";
   }
 
   get(): Observable<WeatherForecast[]> {
