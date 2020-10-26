@@ -1,0 +1,143 @@
+<div class="content-heading">
+  <div>
+    iWorkflow MMC POC - Angular
+    <small></small>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <!-- START card-->
+    <div class="card card-default">
+      <div class="card-body">
+        <form class="form-horizontal" novalidate>
+          <div class="form-group row">
+            <label class="col-xl-3 col-form-label">Name:</label>
+            <div class="col-xl-8">
+              <input type="text" placeholder="" class="form-control" id="person_name" name="person_name" [(ngModel)]="person.name" maxlength="100" />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-xl-3 col-form-label">SSN:</label>
+            <div class="col-xl-8">
+              <input type="text" placeholder="XXX-XX-XXXX" class="form-control" id="person_ssn" name="person_ssn" [(ngModel)]="person.ssn" maxlength="11" required />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-xl-3 col-form-label">Start Date:</label>
+            <div class="col-xl-8">
+              <input type="text" placeholder="" class="form-control" id="person_startdate" name="person_startdate" [(ngModel)]="person.startdate" maxlength="100" required />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-xl-3 col-form-label"></label>
+            <div class="col-xl-8">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="person_isfulltime" id="person_isfulltime" [(ngModel)]="person.isfulltime">Full time
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xl-12">
+              <button class="btn btn-default btn-primary float-right ml-1" type="button" (click)="onSave()">Save</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+    <!-- END card-->
+  </div>
+
+  <div class="col-md-6">
+    <!-- START card-->
+    <div class="card card-default">
+      <div class="card-body">
+        <form class="form-horizontal" novalidate>
+          <div class="form-group row">
+            <label class="col-xl-3 col-form-label">Fee Name:</label>
+            <div class="col-xl-8">
+              <input type="text" placeholder="" class="form-control" id="fee_name" name="fee_name" [(ngModel)]="fee.name" maxlength="100" />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-xl-3 col-form-label">Amount:</label>
+            <div class="col-xl-8">
+              <input type="text" placeholder="$0.00" class="form-control" id="fee_amount" name="fee_amount" [(ngModel)]="fee.amount" />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-xl-3 col-form-label">Fee Type:</label>
+            <div class="col-lg-8">
+              <select class="form-control" id="fee_typeid" name="fee_typeid" [(ngModel)]="fee.feeTypeId">
+                <option value="0">Invalid</option>
+                <option *ngFor="let fee of fees" [value]="fee.id">{{fee.name}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-xl-3 col-form-label">Trigger Type:</label>
+            <div class="col-lg-8">
+              <ng-template #rt let-r="result" let-t="term">
+                <div style="float: left; margin-left: 8px">
+                  <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+                </div>
+              </ng-template>
+
+              <input name="fee_triggerId" id="fee_triggerId" type="text" class="form-control" [(ngModel)]="fee.triggerId" [ngbTypeahead]="search" [resultTemplate]="rt" />
+
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xl-12">
+              <button class="btn btn-default btn-primary float-right ml-1" type="button" (click)="onSaveFee()">Save</button>
+            </div>
+          </div>
+
+
+
+        </form>
+      </div>
+
+    </div>
+    <!-- END card-->
+  </div>
+
+</div>
+
+
+<div class="card card-default">
+  <div class="card-body">
+    <kendo-grid [kendoGridBinding]="filteredItems"
+                [pageSize]="pageSize"
+                [sortable]="true"
+                [pageable]="true"
+                [navigable]="true">
+      <ng-template kendoGridToolbarTemplate>
+        <div class="row">
+          <div class="col-lg-4">
+            <input [(ngModel)]='listFilter' type='text' class="form-control" placeholder='Search...' />
+          </div>
+          <!--<div class="col-lg-8">
+            <button class="btn btn-primary btn-lg float-right mr-3" [routerLink]="['../emailtemplates/edit', 0]">Add new</button>
+          </div>-->
+        </div>
+      </ng-template>
+      <kendo-grid-column field="name" title="Name"></kendo-grid-column>
+      <kendo-grid-column field="age" title="Age"></kendo-grid-column>
+      <kendo-grid-column field="nickName" title="Nick Name"></kendo-grid-column>
+    </kendo-grid>
+  </div>
+</div>
+
