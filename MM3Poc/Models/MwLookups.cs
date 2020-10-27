@@ -18,7 +18,7 @@ namespace MM3Poc.Models
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public decimal Amount { get; set; }
+        public decimal Amount { get; set; } = 0.0M;
         public int? FeeTypeId { get; set; }
         public int? TriggerId { get; set; }
     }

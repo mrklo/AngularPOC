@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MM3Poc.Data;
 using MM3Poc.Models;
+using NSwag.Annotations;
 
 namespace MM3Poc.Controllers
 {
@@ -27,23 +29,32 @@ namespace MM3Poc.Controllers
             return persons;
         }
 
+        [HttpGet("{id}", Name = "GetPerson")]
+        public Person GetPerson(int id)
+        {
+            return new Person();
+        }
+
         [HttpPost]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(Person), StatusCodes.Status201Created)]
         public async Task<ActionResult<ApiResponse>> PostPerson(Person person)
         {
+            await Task.Run(() => Console.WriteLine("PostPerson"));
+
             person.Id = 123;
-            person.HireDate = DateTime.Now;
 
-            await Task.Run(() => Console.WriteLine("PostPerson")
-            );
-
-            string errors = "";
-
-            if (person.SSN == "111-11-1111")
+            if (person.SSN == "111")
             {
-                errors = "Invalid SSN";
+                return BadRequest("An SSN of 111-11-1111");
             }
 
-            return new ApiResponse() { Success = true, Errors = errors };
+            if (person.Name.Equals("Error", StringComparison.CurrentCultureIgnoreCase))
+            {
+                return BadRequest("The word error in a textbox");
+            }
+
+            return CreatedAtAction("GetPerson", new { id = person.Id }, person);
         }
 
     }

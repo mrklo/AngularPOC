@@ -3,11 +3,14 @@ import { EmployeeClient, IEmployee, IPerson, Person, Fee, IFee, ITrigger, FeeCli
 import { Observable } from 'rxjs';
 import { debounceTime, map, distinctUntilChanged } from 'rxjs/operators';
 
+
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
+  selector: 'app-widgets',
+  templateUrl: './widgets.component.html',
+  styleUrls: ['./widgets.component.css']
 })
-export class HomeComponent implements OnInit {
+export class WidgetsComponent implements OnInit {
+
   private pageSize = 12;
   private errorMessage: string;
 
@@ -86,12 +89,12 @@ export class HomeComponent implements OnInit {
     this.personClient.postPerson(this.person).subscribe({
       next: data => {
         console.log(data);
-        },
+      },
       error: err => {
         this.errorMessage = err.response;
         alert(this.errorMessage)
       }
-      });
+    });
   }
 
   onSaveFee() {
@@ -105,6 +108,8 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
+
 
 
 }

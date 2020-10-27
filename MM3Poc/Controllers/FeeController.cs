@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MM3Poc.Models;
 
@@ -25,13 +26,27 @@ namespace MM3Poc.Controllers
             return fees;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<ApiResponse>> PostFee(Fee person)
+        [HttpGet("{id}", Name = "GetFee")]
+        public Fee GetFee(int id)
         {
-            await Task.Run(() => Console.WriteLine("PostFee")
-            );
+            return new Fee();
+        }
 
-            return new ApiResponse() { Success = true, Errors = "" };
+        [HttpPost]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(Fee), StatusCodes.Status201Created)]
+        public async Task<ActionResult<ApiResponse>> PostFee(Fee fee)
+        {
+            await Task.Run(() => Console.WriteLine("PostFee"));
+
+            fee.Id = 1;
+
+            if (fee.FeeTypeId == 0)
+            {
+                return BadRequest("A dropdown option of invalid");
+            }
+
+            return CreatedAtAction("GetFee", new { id = fee.Id }, fee);
         }
     }
 }
