@@ -16,9 +16,9 @@ namespace MM3Poc.Controllers
         {
             List<Employee> employees = new List<Employee>
             {
-                new Employee{ Id=1, Name = "Name 1", Age=20, NickName="" },
-                new Employee{ Id=2, Name = "Name 2", Age=30, NickName="" },
-                new Employee{ Id=3, Name = "Name 3", Age=40, NickName="" }
+                new Employee{ Id=1, Name = "Name 1", Age=20, NickName="Nick Name 1" },
+                new Employee{ Id=2, Name = "Name 2", Age=30, NickName="Nick Name 2" },
+                new Employee{ Id=3, Name = "Name 3", Age=40, NickName="Nick Name 3" }
             };
 
             return employees;

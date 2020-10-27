@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EmployeeClient, IEmployee, IPerson, Person, Fee, IFee, ITrigger, FeeClient, TriggerClient, Trigger, PersonClient } from '../core/services/api/api.service';
 import { Observable } from 'rxjs';
 import { debounceTime, map, distinctUntilChanged } from 'rxjs/operators';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-widgets',
@@ -10,7 +10,6 @@ import { debounceTime, map, distinctUntilChanged } from 'rxjs/operators';
   styleUrls: ['./widgets.component.css']
 })
 export class WidgetsComponent implements OnInit {
-
   private pageSize = 12;
   private errorMessage: string;
 
@@ -50,11 +49,14 @@ export class WidgetsComponent implements OnInit {
     private personClient: PersonClient,
     private feeClient: FeeClient,
     private triggerClient: TriggerClient,
-    private employeeClient: EmployeeClient
+    private employeeClient: EmployeeClient,
+    private spinner: NgxSpinnerService,
   ) {
   }
 
   ngOnInit() {
+    this.spinner.show();
+
     // employees
     this.employeeClient.get().subscribe({
       next: data => {
@@ -77,6 +79,7 @@ export class WidgetsComponent implements OnInit {
     this.triggerClient.get().subscribe({
       next: data => {
         this.triggers = data;
+        this.spinner.hide();
       },
       error: err => this.errorMessage = err
     });
@@ -86,9 +89,11 @@ export class WidgetsComponent implements OnInit {
   formatter = (trigger: Trigger) => null;
 
   onSave() {
+    this.spinner.show();
     this.personClient.postPerson(this.person).subscribe({
       next: data => {
         console.log(data);
+        this.spinner.hide();
       },
       error: err => {
         this.errorMessage = err.response;
@@ -98,9 +103,11 @@ export class WidgetsComponent implements OnInit {
   }
 
   onSaveFee() {
+    this.spinner.show();
     this.feeClient.postFee(this.fee).subscribe({
       next: data => {
         console.log(data);
+        this.spinner.hide();
       },
       error: err => {
         this.errorMessage = err.response;
@@ -108,8 +115,5 @@ export class WidgetsComponent implements OnInit {
       }
     });
   }
-
-
-
 
 }

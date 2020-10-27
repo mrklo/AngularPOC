@@ -1,13 +1,18 @@
+<ngx-spinner id="main-spinner"
+             bdColor="rgba(51,51,51,0.8)"
+             size="large"
+             color="#fff"
+             type="square-loader">
+</ngx-spinner>
+
 <div class="content-heading">
-  <div>
+  <h3>
     iWorkflow MMC POC - Angular
-    <small></small>
-  </div>
+  </h3>
 </div>
 
 <div class="row">
   <div class="col-md-6">
-    <!-- START card-->
     <div class="card card-default">
       <div class="card-body">
         <form class="form-horizontal" novalidate>
@@ -53,11 +58,9 @@
       </div>
 
     </div>
-    <!-- END card-->
   </div>
 
   <div class="col-md-6">
-    <!-- START card-->
     <div class="card card-default">
       <div class="card-body">
         <form #form="ngForm" class="form-horizontal" novalidate>
@@ -107,17 +110,12 @@
             </div>
           </div>
 
-
-
         </form>
       </div>
 
     </div>
-    <!-- END card-->
   </div>
-
 </div>
-
 
 <div class="card card-default">
   <div class="card-body">
@@ -131,9 +129,6 @@
           <div class="col-lg-4">
             <input [(ngModel)]='listFilter' type='text' class="form-control" placeholder='Search...' />
           </div>
-          <!--<div class="col-lg-8">
-            <button class="btn btn-primary btn-lg float-right mr-3" [routerLink]="['../emailtemplates/edit', 0]">Add new</button>
-          </div>-->
         </div>
       </ng-template>
       <kendo-grid-column field="name" title="Name"></kendo-grid-column>
